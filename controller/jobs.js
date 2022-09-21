@@ -25,9 +25,8 @@ const getJob = async (req, res) => {
 
 const createJob = async (req, res) => {
     req.body.createdBy = req.user._id
-    console.log(req.body);
     const job = await Jobs.create(req.body)
-    res.status(StatusCodes.CREATED).json({"msg": "Create job", user: req.user})
+    res.status(StatusCodes.CREATED).json({"msg": "New job created!", user: req.user})
 }
 
 const updateJob = async (req, res) => {

@@ -25,6 +25,7 @@ const authMiddleware = async (req, res, next) => {
 
         const user = await User.findOne({"_id":payload.userId}).select('-password').exec() // .select(-password) hides pw from select
         req.user = user
+        req.user.token = token; // not neccessary
 
         // can use below or two lines above. good practive above.
         //req.user = { userId:payload.userId, name: payload.name } // the actual value had userId and name
