@@ -1,9 +1,3 @@
-// 3rd party security middlewares
-const helmet = require('helmet') // secure express apps by setting various http headers
-const cors = require('cors') // allows access to public domain
-const xss = require('xss-clean') // sanitize or clean req.body, req.params and req.query and secure cross origin request
-const rateLimiter = require('express-rate-limit') // limit calls to functions
-
 const express = require('express')
 require('dotenv').config()
 require('express-async-errors')
@@ -12,6 +6,17 @@ const morgan = require('morgan')
 const errorMiddleware = require('./middleware/errorHandler')
 const notFoundMiddleware = require('./middleware/notFoundHandler')
 const {InternalServerError} = require('./error/index')
+
+// 3rd party security middlewares
+const helmet = require('helmet') // secure express apps by setting various http headers
+const cors = require('cors') // allows access to public domain
+const xss = require('xss-clean') // sanitize or clean req.body, req.params and req.query and secure cross origin request
+const rateLimiter = require('express-rate-limit') // limit calls to functions
+
+// Swagger
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDoc = YAML.load('./swagger.yaml')
 
 const app = express();
 
@@ -29,10 +34,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('tiny'))
 
-
+// default route
 app.get('/', (req, res) => {
-    res.send('jobs api');
+    res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
 })
+
+// api docs route // Swagger docs
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 // route
 require('./route/project-route')(app)
