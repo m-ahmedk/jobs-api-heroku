@@ -34,7 +34,6 @@ const authMiddleware = async (req, res, next) => {
     catch(error) {
         throw new UnauthenticateError('Invalid Authentication')
     }
-
 }
 
 module.exports = authMiddleware
