@@ -57,4 +57,4 @@ heroku open
 ```
 
 ## License
-This project is licensed under the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/m-ahmedk/jobs-api-heroku.git/blob/main/LICENSE).
+This project is licensed under the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/m-ahmedk/jobs-api-heroku/blob/main/LICENSE).
